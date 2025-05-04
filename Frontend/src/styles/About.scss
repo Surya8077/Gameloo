@@ -1,0 +1,148 @@
+.about-page {
+  .about-hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('/assets/about-hero.jpg') center/cover;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    margin-bottom: 4rem;
+
+    .about-hero-content {
+      max-width: 800px;
+      padding: 0 2rem;
+
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .about-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+
+    .about-section {
+      margin-bottom: 4rem;
+
+      h2 {
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+
+        &:after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 50px;
+          height: 3px;
+          background-color: $secondary-color;
+        }
+      }
+
+      p {
+        margin-bottom: 1rem;
+        line-height: 1.8;
+      }
+
+      .mission-values {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+
+        .value-item {
+          background-color: white;
+          padding: 1.5rem;
+          border-radius: 8px;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+          text-align: center;
+
+          h3 {
+            color: $secondary-color;
+            margin-bottom: 1rem;
+          }
+        }
+      }
+
+      .team-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 2rem;
+
+        .team-member {
+          text-align: center;
+
+          .member-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 3px solid $secondary-color;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+            }
+          }
+
+          h3 {
+            margin-bottom: 0.5rem;
+          }
+
+          p {
+            color: $dark-gray;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .about-page {
+    .about-hero {
+      height: 30vh;
+
+      .about-hero-content {
+        h1 {
+          font-size: 2rem;
+        }
+
+        p {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .about-content {
+      padding: 0 1rem 2rem;
+
+      .about-section {
+        margin-bottom: 3rem;
+
+        .mission-values {
+          grid-template-columns: 1fr;
+        }
+
+        .team-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+  }
+} 
