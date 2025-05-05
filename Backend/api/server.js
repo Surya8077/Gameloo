@@ -8,6 +8,7 @@ const { FB } = require('fb');
 const axios = require('axios');
 const dotenv = require('dotenv');
 const authRoutes = require('../routes/auth');
+const path = require('path');
 
 // Load environment variables
 dotenv.config();
@@ -34,6 +35,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use((req, res, next) => {
     console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
     next();
+});
+
+// Serve static files from the Frontend folder
+app.use(express.static(path.join(__dirname, '../../Frontend')));
+
+// Catch-all route to serve landing.html for unmatched routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../Frontend/landing.html'));
 });
 
 // Test route
@@ -546,7 +555,7 @@ app.post('/github-login', async (req, res) => {
     // Generate JWT token
     const token = jwt.sign(
       { userId: user._id, email: user.email },
-      process.env.JWT_SECRET,
+      JWT_SECRET,
       { expiresIn: '24h' }
     );
 
