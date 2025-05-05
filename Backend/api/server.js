@@ -7,7 +7,7 @@ const { OAuth2Client } = require('google-auth-library');
 const { FB } = require('fb');
 const axios = require('axios');
 const dotenv = require('dotenv');
-const authRoutes = require('./routes/auth');
+const authRoutes = require('../routes/auth');
 
 // Load environment variables
 dotenv.config();
@@ -70,11 +70,11 @@ const connectWithRetry = async () => {
 connectWithRetry();
 
 // Import models
-const User = require('./models/User');
-const Game = require('./models/Game');
-const Order = require('./models/Order');
-const Cart = require('./models/Cart');
-const Review = require('./models/Review');
+const User = require('../models/User');
+const Game = require('../models/Game');
+const Order = require('../models/Order');
+const Cart = require('../models/Cart');
+const Review = require('../models/Review');
 
 // Make models available globally
 app.locals.models = {
@@ -580,27 +580,5 @@ app.use((err, req, res, next) => {
     });
 });
 
-// Add error handling for server startup
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-  console.log(`CORS enabled for origins: ${process.env.CORS_ORIGIN || 'http://127.0.0.1:5502'}`);
-}).on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.error(`Port ${PORT} is already in use. Please try a different port.`);
-    process.exit(1);
-  } else {
-    console.error('Server error:', err);
-  }
-});
-
-// Graceful shutdown
-process.on('SIGTERM', () => {
-    console.log('SIGTERM received. Shutting down gracefully...');
-    server.close(() => {
-        console.log('Server closed');
-        mongoose.connection.close(false, () => {
-            console.log('MongoDB connection closed');
-            process.exit(0);
-        });
-    });
-});
+// Export the app for Vercel serverless functions
+module.exports = app;
