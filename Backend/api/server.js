@@ -42,7 +42,7 @@ app.use(express.static(path.join(__dirname, '../../Frontend')));
 
 // Catch-all route to serve landing.html for unmatched routes
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../../Frontend/landing.html'));
+    res.sendFile(path.join(__dirname, '../../Frontend/Landing.html'));
 });
 
 // Test route
