@@ -589,5 +589,12 @@ app.use((err, req, res, next) => {
     });
 });
 
+if (process.env.NODE_ENV !== 'production') {
+    const PORT = 8080; // Or any port you prefer
+    app.listen(PORT, () => {
+        console.log(`Server is running on http://localhost:${PORT}`);
+    });
+}
+
 // Export the app for Vercel serverless functions
 module.exports = app;
